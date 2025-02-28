@@ -1,0 +1,1083 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Page {
+  total: Int!
+  pageNum: Int!
+  pageSize: Int!
+}
+
+type Result {
+  code: Int!
+  message: String!
+  returnCode: String
+  data: String
+}
+
+type OrderTimeType {
+  """開始時間"""
+  startTime: String!
+
+  """结束時間"""
+  endTime: String!
+
+  """key"""
+  key: Float!
+}
+
+type ReducibleTimeType {
+  """星期幾"""
+  week: String!
+
+  """可預約時間(JSON格式)"""
+  orderTime: [OrderTimeType!]!
+}
+
+type TeacherType {
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """名稱"""
+  name: String!
+
+  """照片"""
+  photoUrl: String
+
+  """教齡"""
+  teacherTime: Float
+
+  """風格標籤，以，隔开"""
+  tags: String
+
+  """學歷"""
+  education: String
+
+  """資歷"""
+  seniority: String
+
+  """職業經驗"""
+  experience: String
+
+  """獲獎經歷"""
+  carryPrize: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CourseType {
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """課程名称"""
+  name: String!
+
+  """課程描述"""
+  desc: String
+
+  """適齡人群"""
+  group: String!
+
+  """封面圖"""
+  coverUrl: String
+
+  """適合基礎"""
+  baseAbility: String!
+
+  """限制上課人数"""
+  limitNumber: Float!
+
+  """持續時间"""
+  duration: Float!
+
+  """預约信息"""
+  reserveInfo: String
+
+  """退款信息"""
+  refundInfo: String
+
+  """其他說明信息"""
+  otherInfo: String
+
+  """可預約時間"""
+  reducibleTime: [ReducibleTimeType!]
+
+  """任课老师"""
+  teachers: [TeacherType!]
+}
+
+type CardType {
+  """id"""
+  id: String!
+
+  """名字"""
+  name: String!
+
+  """
+  卡類型 
+      TIME = "time",
+      DURATION = "duration"
+  """
+  type: String!
+
+  """上課次數"""
+  time: Float!
+
+  """有效期 （天）"""
+  validityDay: Float!
+
+  """課程"""
+  course: CourseType!
+}
+
+type CardResult {
+  code: Int!
+  message: String!
+  data: CardType
+}
+
+type CardResults {
+  code: Int!
+  message: String!
+  data: [CardType!]
+  page: Page
+}
+
+type CourseResult {
+  code: Int!
+  message: String!
+  data: CourseType
+}
+
+type CourseResults {
+  code: Int!
+  message: String!
+  data: [CourseType!]
+  page: Page
+}
+
+type StudentType {
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """匿稱"""
+  name: String
+
+  """手機號"""
+  tel: String
+
+  """頭像"""
+  avatar: String
+
+  """帳號"""
+  account: String
+
+  """openid"""
+  openid: String
+}
+
+type OrgImageType {
+  id: String
+  url: String!
+  remark: String
+}
+
+type OrganizationType {
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """營業执照"""
+  businessLicense: String!
+
+  """法人身份證正面"""
+  identityCardFrontImg: String!
+
+  """法人身份證反面"""
+  identityCardBackImg: String!
+
+  """標籤以，隔开"""
+  tags: String
+
+  """簡介"""
+  description: String
+
+  """門市名"""
+  name: String
+
+  """logo"""
+  logo: String
+
+  """經度"""
+  longitude: String
+
+  """緯度"""
+  latitude: String
+
+  """地址"""
+  address: String
+
+  """電話"""
+  tel: String
+
+  """封面圖"""
+  orgFrontImg: [OrgImageType!]
+
+  """室內圖"""
+  orgRoomImg: [OrgImageType!]
+
+  """其他圖"""
+  orgOtherImg: [OrgImageType!]
+
+  """門店的課程"""
+  courses: [CourseType!]
+}
+
+type ScheduleType {
+  """id"""
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """上課日期"""
+  schoolDay: DateTime
+
+  """開始時间"""
+  startTime: String
+
+  """结束時間"""
+  endTime: String
+
+  """人數限制"""
+  limitNumber: Float
+
+  """課程實體信息"""
+  course: CourseType
+
+  """機構信息"""
+  org: OrganizationType
+
+  """老師"""
+  teacher: TeacherType
+
+  """預約記錄"""
+  scheduleRecords: [ScheduleRecordType!]
+}
+
+type ScheduleRecordType {
+  """id"""
+  id: String!
+
+  """状态"""
+  status: String
+
+  """预约时间"""
+  subscribeTime: DateTime
+
+  """学员"""
+  student: StudentType
+
+  """课程表"""
+  schedule: ScheduleType
+
+  """机构信息"""
+  org: OrganizationType
+
+  """课程"""
+  course: CourseType
+}
+
+type ScheduleRecordResult {
+  code: Int!
+  message: String!
+  data: ScheduleRecordType
+}
+
+type ScheduleRecordResults {
+  code: Int!
+  message: String!
+  data: [ScheduleRecordType!]
+  page: Page
+}
+
+type CardRecordType {
+  """id"""
+  id: String!
+
+  """開始時間"""
+  startTime: DateTime
+
+  """結束時間"""
+  endTime: DateTime
+
+  """購買時間"""
+  buyTime: DateTime
+
+  """剩餘次數"""
+  residueTime: Float
+
+  """狀態"""
+  status: String
+
+  """關聯卡實體"""
+  card: CardType
+
+  """課程"""
+  course: CourseType
+
+  """學員"""
+  student: StudentType
+
+  """門市"""
+  org: OrganizationType
+}
+
+type CardRecordResult {
+  code: Int!
+  message: String!
+  data: CardRecordType
+}
+
+type CardRecordResults {
+  code: Int!
+  message: String!
+  data: [CardRecordType!]
+  page: Page
+}
+
+type StudentResult {
+  code: Int!
+  message: String!
+  data: StudentType
+}
+
+type StudentResults {
+  code: Int!
+  message: String!
+  data: [StudentType!]
+  page: Page
+}
+
+type ScheduleResult {
+  code: Int!
+  message: String!
+  data: ScheduleType
+}
+
+type ScheduleResults {
+  code: Int!
+  message: String!
+  data: [ScheduleType!]
+  page: Page
+}
+
+type OrganizationResult {
+  code: Int!
+  message: String!
+  data: OrganizationType
+}
+
+type OrganizationResults {
+  code: Int!
+  message: String!
+  data: [OrganizationType!]
+  page: Page
+}
+
+type WxorderType {
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """微信公眾號ID"""
+  appid: String!
+
+  """商戶號"""
+  mchid: String!
+
+  """openid"""
+  openid: String
+
+  """交易類型"""
+  trade_type: String
+
+  """交易狀態"""
+  trade_state: String
+
+  """銀行"""
+  bank_type: String
+
+  """微信支付訂單號"""
+  transaction_id: String
+
+  """商戶訂單號"""
+  out_trade_no: String
+
+  """附加数數"""
+  attach: String
+
+  """交易狀態描述"""
+  trade_state_desc: String
+
+  """支付完成時間"""
+  success_time: String
+
+  """訂單總金額，單位為分"""
+  total: Float
+
+  """用户支付金額，單位為分"""
+  payer_total: Float
+
+  """CNY：人民幣，中國境内商户號僅支持人民幣"""
+  currency: String
+
+  """用户支付幣種，示例值：CNY"""
+  payer_currency: String
+
+  """门店"""
+  org: OrganizationType
+}
+
+type WxorderResult {
+  code: Int!
+  message: String!
+  data: WxorderType
+}
+
+type WxorderResults {
+  code: Int!
+  message: String!
+  data: [WxorderType!]
+  page: Page
+}
+
+type ProductType {
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """名稱"""
+  name: String!
+
+  """描述"""
+  desc: String
+
+  """狀態"""
+  status: String!
+
+  """距離"""
+  distance: String!
+
+  """分類"""
+  type: String
+
+  """庫存總數"""
+  stock: Float!
+
+  """當前庫存"""
+  curStock: Float!
+
+  """賣出去多少"""
+  buyNumber: Float!
+
+  """每人限購數量"""
+  limitBuyNumber: Float!
+
+  """封面圖"""
+  coverUrl: String!
+
+  """頭部banner圖"""
+  bannerUrl: String!
+
+  """原價"""
+  originalPrice: Float!
+
+  """優惠價"""
+  preferentialPrice: Float!
+
+  """門店信息"""
+  org: OrganizationType!
+
+  """消費卡"""
+  cards: [CardType!]
+}
+
+type OrderType {
+  id: String
+
+  """createdAt"""
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """數量"""
+  quantity: Float!
+
+  """amount"""
+  amount: Float!
+
+  """手機號碼"""
+  tel: String!
+
+  """狀態"""
+  status: String!
+
+  """訂單號"""
+  outTradeNo: String
+
+  """購買學員"""
+  student: StudentType
+
+  """門店(機構)"""
+  org: OrganizationType
+
+  """商品"""
+  product: ProductType
+
+  """微信訂單訊息"""
+  wxOrder: WxorderType
+}
+
+type OrderResult {
+  code: Int!
+  message: String!
+  data: OrderType
+}
+
+type OrderResults {
+  code: Int!
+  message: String!
+  data: [OrderType!]
+  page: Page
+}
+
+type TeacherResult {
+  code: Int!
+  message: String!
+  data: TeacherType
+}
+
+type TeacherResults {
+  code: Int!
+  message: String!
+  data: [TeacherType!]
+  page: Page
+}
+
+type ProductTypeType {
+  """key"""
+  key: String!
+
+  """名稱"""
+  title: String!
+}
+
+type ProductResult {
+  code: Int!
+  message: String!
+  data: ProductType
+}
+
+type ProductResults {
+  code: Int!
+  message: String!
+  data: [ProductType!]
+  page: Page
+}
+
+type ProductTypesResults {
+  code: Int!
+  message: String!
+  data: [ProductTypeType!]
+  page: Page
+}
+
+type UserType {
+  id: String!
+  createdAt: DateTime
+  createdBy: String
+  updatedAt: DateTime
+  updatedBy: String
+  deletedAt: DateTime
+  deletedBy: String
+
+  """匿稱"""
+  name: String!
+
+  """簡介"""
+  desc: String!
+
+  """聯絡電話"""
+  tel: String!
+
+  """用戶資料"""
+  account: String!
+
+  """個人頭像"""
+  avatar: String
+}
+
+type UserResult {
+  code: Int!
+  message: String!
+  data: UserType
+}
+
+type UserResults {
+  code: Int!
+  message: String!
+  data: [UserType!]
+  page: Page
+}
+
+type OSSType {
+  """過期時間"""
+  expire: String!
+
+  """策略"""
+  policy: String!
+
+  """簽名"""
+  signature: String!
+
+  """key"""
+  accessId: String!
+
+  """host"""
+  host: String!
+
+  """存放在阿里雲Bucket的資料夾名稱"""
+  dir: String!
+}
+
+type WxConfig {
+  """公眾號ID"""
+  appId: String!
+
+  """時間戳，自1970年以來的秒數"""
+  timeStamp: Float!
+
+  """随機串"""
+  nonceStr: String!
+
+  """參數包"""
+  package: String!
+
+  """微信簽名方式"""
+  signType: String!
+
+  """微信簽名"""
+  paySign: String!
+}
+
+type WxConfigResult {
+  code: Int!
+  message: String!
+  data: WxConfig
+}
+
+type Query {
+  """使用ID查詢門市(機構)料"""
+  find(id: String!): OrganizationType!
+
+  """使用ID查詢用戶資料"""
+  getUserInfo: UserType!
+
+  """查詢目前用戶數量"""
+  getUsers(page: PageInput!): UserResults!
+
+  """取得OSS相關訊息"""
+  getOSSInfo: OSSType!
+  getStudentInfo: StudentResult!
+
+  """獲取學生筆數的資料"""
+  getStudents(page: PageInput!): StudentResults!
+  getOrganizationInfo(id: String!): OrganizationResult!
+  getOrganizations(page: PageInput!, name: String): OrganizationResults!
+
+  """獲取課程筆數的資料"""
+  getCourses(page: PageInput!, name: String): CourseResults!
+
+  """使用ID獲取某筆課程詳細資料"""
+  getCourseInfo(id: String!): CourseResult!
+
+  """使用ID查詢用戶資料"""
+  getCardInfo(id: String!): CardResult!
+
+  """獲取消費卡筆數的資料"""
+  getCards(courseId: String!, name: String): CardResults!
+
+  """使用ID查詢用戶資料"""
+  getProductInfo(id: String!): ProductResult!
+
+  """獲取商品筆數的資料"""
+  getProducts(page: PageInput!, name: String): ProductResults!
+  getProductTypes: ProductTypesResults!
+  getProductsForH5(page: PageInput!, longitude: Float!, latitude: Float!, type: String, name: String): ProductResults!
+  getProductsByOrgIdForH5(orgId: String!): ProductResults!
+
+  """使用ID查詢用戶資料"""
+  getTeacherInfo(id: String!): TeacherResult!
+  getTeachers(page: PageInput!, name: String): TeacherResults!
+
+  """使用ID查詢用戶資料"""
+  getOrderInfo(id: String!): OrderResult!
+
+  """獲取xx筆數的資料"""
+  getOrders(page: PageInput!, name: String): OrderResults!
+
+  """使用ID查詢用戶資料"""
+  getWxorderInfo(id: String!): WxorderResult!
+
+  """獲取微信訂單筆數的資料"""
+  getWxorders(page: PageInput!): WxorderResults!
+  getCardRecordInfo(id: String!): CardRecordResult!
+
+  """獲取個人的消费卡"""
+  getCardRecordsForH5(page: PageInput!): CardRecordResults!
+  getCardRecords(page: PageInput!): CardRecordResults!
+
+  """獲取目前會員(學員)在某個課程上可以用的消費卡"""
+  getUseCardRecordsByCourse(courseId: String!): CardRecordResults!
+  getScheduleInfo(id: String!): ScheduleResult!
+  getSchedules(today: String!): ScheduleResults!
+
+  """獲取當前會員(學員)的消費於裡的可預約課程"""
+  getCanSubscribeCourses: OrganizationResults!
+
+  """獲取某一某課程的近七天的程程表"""
+  getSchedulesByCourse(courseId: String!): ScheduleResults!
+  getScheduleRecordInfo(id: String!): ScheduleRecordResult!
+
+  """獲取某個會員(學員)已預約課程的資料"""
+  getScheduleRecords(page: PageInput!): ScheduleRecordResults!
+}
+
+input PageInput {
+  pageNum: Float!
+  pageSize: Float!
+}
+
+type Mutation {
+  """新增用戶"""
+  create(params: OrganizationInput!): OrganizationResult!
+
+  """更新用戶資料"""
+  updateUserInfo(id: String!, params: UserInput!): Result!
+
+  """刪除一個用戶"""
+  delete(id: String!): Boolean!
+
+  """發送短信驗證碼"""
+  sendCodeMsg(tel: String!): Result!
+
+  """登錄"""
+  login(tel: String!, code: String!): Result!
+
+  """學員登錄"""
+  studentLogin(account: String!, password: String!): Result!
+
+  """学员注册"""
+  studentRegister(account: String!, password: String!): Result!
+
+  """新增學生資料"""
+  commitStudentInfo(params: StudentInput!, id: String): StudentResult!
+
+  """軟刪除學生資料"""
+  softDeleteStudent(id: String!): Result!
+
+  """更新門市資料"""
+  updateOrganizationInfo(id: String!, params: OrganizationInput!): Result!
+
+  """刪除一個門市"""
+  deleteOrganization(id: String!): Result!
+  commitOrganization(params: OrganizationInput!, id: String): OrganizationResult!
+
+  """建立或更新課程資料"""
+  commitCourseInfo(params: PartialCourseInput!, id: String): CourseResult!
+
+  """軟刪除課程資料"""
+  softDeleteCorse(id: String!): Result!
+
+  """新增消費卡資料"""
+  commitCardInfo(params: CardInput!, courseId: String!, id: String): CardResult!
+
+  """軟刪除消費卡筆資料"""
+  softDeleteCard(id: String!): Result!
+
+  """新增商品資料"""
+  commitProductInfo(params: PartialProductInput!, id: String): ProductResult!
+
+  """軟刪除商品資料"""
+  softDeleteProduct(id: String!): Result!
+
+  """新增教師資料"""
+  commitTeacherInfo(params: TeacherInput!, id: String): TeacherResult!
+
+  """更新xx資料"""
+  updateTeacherInfo(id: String!, params: TeacherInput!): Result!
+
+  """軟刪除xx資料"""
+  softDeleteTeacher(id: String!): Result!
+  getWxpayConfig(productId: String!, quantity: Float!, amount: Float!): WxConfigResult!
+  mockOrderGenerator(productId: String!, quantity: Float!, amount: Float!): Result!
+
+  """軟刪除xx資料"""
+  softDeleteOrder(id: String!): Result!
+
+  """軟刪除微信訂單資料"""
+  softDeleteWxorder(id: String!): Result!
+  deleteCardRecord(id: String!): Result!
+
+  """開始排课"""
+  autoCreateSchedule(startDay: String!, endDay: String!): Result!
+  deleteSchedule(id: String!): Result!
+
+  """建立預約課程"""
+  subscribeCourse(scheduleId: String!, cardId: String!): Result!
+  deleteScheduleRecord(id: String!): Result!
+
+  """取消已預約的課程"""
+  cancelSubscribeCourse(scheduleRecordId: String!): Result!
+}
+
+input OrganizationInput {
+  """名稱"""
+  name: String!
+
+  """logo"""
+  logo: String!
+
+  """手機號"""
+  tel: String
+
+  """tags"""
+  tags: String
+
+  """longitude"""
+  longitude: String
+
+  """latitude"""
+  latitude: String
+
+  """latitude"""
+  address: String
+
+  """營業執照"""
+  businessLicense: String!
+
+  """description"""
+  description: String!
+
+  """法人身份證"""
+  identityCardFrontImg: String!
+
+  """法人身份證反面"""
+  identityCardBackImg: String!
+
+  """機構門面照片"""
+  orgFrontImg: [OrgImageInput!]
+
+  """機構環境照片"""
+  orgRoomImg: [OrgImageInput!]
+
+  """機構環境照片"""
+  orgOtherImg: [OrgImageInput!]
+}
+
+input OrgImageInput {
+  id: String
+  url: String!
+  remark: String
+}
+
+input UserInput {
+  """匿稱"""
+  name: String!
+
+  """簡介"""
+  desc: String!
+
+  """個人頭像"""
+  avatar: String
+}
+
+input StudentInput {
+  """匿稱"""
+  name: String!
+
+  """手機號"""
+  tel: String!
+
+  """頭像"""
+  avatar: String!
+}
+
+input PartialCourseInput {
+  """課程名称"""
+  name: String
+
+  """課程描述"""
+  desc: String
+
+  """適齡人群"""
+  group: String
+
+  """適齡基础"""
+  baseAbility: String
+
+  """封面圖"""
+  coverUrl: String
+
+  """限制上課人数"""
+  limitNumber: Float
+
+  """持續時间"""
+  duration: Float
+
+  """預约信息"""
+  reserveInfo: String
+
+  """退款信息"""
+  refundInfo: String
+
+  """其他說明信息"""
+  otherInfo: String
+
+  """可約時間"""
+  reducibleTime: [ReducibleTimeInput!]
+
+  """任課老師"""
+  teachers: [String!]
+}
+
+input ReducibleTimeInput {
+  """星期幾"""
+  week: String!
+
+  """可預約時間(JSON格式)"""
+  orderTime: [OrderTimeInput!]!
+}
+
+input OrderTimeInput {
+  """開始時間"""
+  startTime: String!
+
+  """结束時間"""
+  endTime: String!
+
+  """key"""
+  key: Float!
+}
+
+input CardInput {
+  """名字"""
+  name: String!
+
+  """卡類型 次數：time 時長：duration"""
+  type: String!
+
+  """上課次數"""
+  time: Float
+
+  """有效期（天）"""
+  validityDay: Float!
+}
+
+input PartialProductInput {
+  """名稱"""
+  name: String
+
+  """描述"""
+  desc: String
+
+  """狀態"""
+  status: String
+
+  """分類"""
+  type: String
+
+  """庫存總數"""
+  stock: Float
+
+  """每人限購數量"""
+  limitBuyNumber: Float
+
+  """封面圖"""
+  coverUrl: String
+
+  """頭部banner圖"""
+  bannerUrl: String
+
+  """原價"""
+  originalPrice: Float
+
+  """優惠價"""
+  preferentialPrice: Float
+
+  """消費卡"""
+  cards: [String!]
+}
+
+input TeacherInput {
+  """名稱"""
+  name: String!
+
+  """照片"""
+  photoUrl: String!
+
+  """教齡"""
+  teacherTime: Float
+
+  """風格標籤，以，隔开"""
+  tags: String
+
+  """學歷"""
+  education: String
+
+  """資歷"""
+  seniority: String
+
+  """職業經驗"""
+  experience: String
+
+  """獲獎經歷"""
+  carryPrize: String
+}

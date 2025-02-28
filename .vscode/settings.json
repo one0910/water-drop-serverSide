@@ -1,0 +1,7 @@
+{
+  "less.lint.validProperties": ["composes"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "cSpell.words": ["wxorder", "Wxpay"]
+}

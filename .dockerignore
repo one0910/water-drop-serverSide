@@ -1,0 +1,5 @@
+.vscode
+plopTemplates
+node_modules
+dist
+test
