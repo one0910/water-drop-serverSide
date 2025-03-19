@@ -39,7 +39,9 @@ import { CardRecordModule } from './modules/cardRecord/card-record.module';
     //註冊GraphQL，讓Nestjs具有GraphQL的能力
     GraphQLModule.forRoot({
       driver: ApolloDriver,
-      autoSchemaFile: './schema.gql' //設定true會把schema放到記憶體裡，所以它可以更改存放的位置，不一定要放在記憶體
+      autoSchemaFile: './schema.gql', //設定true會把schema放到記憶體裡，所以它可以更改存放的位置，不一定要放在記憶體
+      playground: true, //啟用 GraphQL 的可視化操作介面
+      introspection: true //讓 GraphQL API 允許查詢整個 schema 結構，Playground 編輯器可以正確顯示你所有定義的 query、mutation、type、input等
     }),
     UserModule,
     OSSModule,
