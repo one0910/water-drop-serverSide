@@ -10,7 +10,7 @@ WORKDIR /opt/app
 
 COPY --from=builder ./node_modules ./node_modules
 COPY --from=builder ./dist ./dist
-COPY .env .env
+# COPY .env .env
 EXPOSE 3000
 
 ENV NODE_ENV=production
